@@ -30,7 +30,7 @@ extern "C" [[gnu::visibility("default")]] void mod_init() {
     auto Options_typeinfo_name       = hat::find_pattern(range1, hat::object_to_signature("7Options")).get();
     auto Options_typeinfo            = hat::find_pattern(range2, hat::object_to_signature(Options_typeinfo_name)).get() - sizeof(void*);
     auto Options_vtable              = hat::find_pattern(range2, hat::object_to_signature(Options_typeinfo)).get() + sizeof(void*);
-    auto Options_getScreenAnimations = reinterpret_cast<bool (**)(void*)>(Options_vtable) + 136;
+    auto Options_getScreenAnimations = reinterpret_cast<bool (**)(void*)>(Options_vtable) + 137;
 
     auto SplashTextRenderer_typeinfo_name = hat::find_pattern(range1, hat::object_to_signature("18SplashTextRenderer")).get();
     auto SplashTextRenderer_typeinfo      = hat::find_pattern(range2, hat::object_to_signature(SplashTextRenderer_typeinfo_name)).get() - sizeof(void*);
@@ -52,7 +52,7 @@ extern "C" [[gnu::visibility("default")]] void mod_init() {
         screenAnimations = false;
     };
 
-    if (auto addr = hat::find_pattern(range1, "FF 91 40 04 00 00 84 C0 74 24"_sig).get()) {
+    if (auto addr = hat::find_pattern(range1, "FF 91 48 04 00 00 84 C0 74 24"_sig).get()) {
         addr[8] = std::byte{0x90};
         addr[9] = std::byte{0x90};
     }
